@@ -28,6 +28,12 @@ export class LoginComponent {
   msgError: string = '';
   msgSuccess: string = '';
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+     this.toastrService.clear();
+  }
+
   loginForm: FormGroup = this.formBuilder.group({
     email: [null, [Validators.required, Validators.email]],
     password: [

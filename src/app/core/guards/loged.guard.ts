@@ -14,5 +14,6 @@ if (isPlatformBrowser(id)) {
     return true;
 
 } 
+
   return false
   };
