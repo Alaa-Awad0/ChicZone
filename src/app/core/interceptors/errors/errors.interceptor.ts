@@ -6,7 +6,8 @@ import { catchError, throwError } from 'rxjs';
 export const errorsInterceptor: HttpInterceptorFn = (req, next) => {
   const toastrService = inject(ToastrService);
   return next(req).pipe(catchError((err) => {
-toastrService.error(err.error.message, 'Error');
-  return throwError(() => err);
+    if (!req.url.includes('/login')) {
+      toastrService.error(err.error.message, 'Error');
+    }  return throwError(() => err);
 }));
 };

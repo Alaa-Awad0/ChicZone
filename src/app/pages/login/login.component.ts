@@ -51,7 +51,7 @@ export class LoginComponent {
               this.authService.saveUserData();
               this.router.navigate(['/home']);
               this.isLoading = false;
-              this.toastrService.show();
+              this.toastrService.success('You Logged Successfully', 'Success');
             }, 5000);
           }
         },

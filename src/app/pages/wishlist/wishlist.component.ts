@@ -4,11 +4,10 @@ import { IWishlistProd } from '../../shared/interfaces/iwishlist-prod';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../core/services/cart/cart.service';
 import Swal from 'sweetalert2';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [DatePipe],
+  imports: [],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.scss',
 })

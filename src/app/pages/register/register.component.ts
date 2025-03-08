@@ -10,6 +10,7 @@ import {
 import { AuthService } from '../../core/services/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +22,8 @@ export class RegisterComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly formBuilder = inject(FormBuilder);
+  private readonly toastrService = inject(ToastrService);
+
 
   isLoading: boolean = false;
   msgError: string = '';
@@ -76,6 +79,7 @@ export class RegisterComponent {
           this.msgSuccess = res.message;
           if (this.msgSuccess) {
             setTimeout(() => {
+this.toastrService.success('Account created successfully', 'Success')
               this.router.navigate(['/login']);
             }, 5000);
           }
