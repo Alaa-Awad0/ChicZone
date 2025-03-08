@@ -1,15 +1,23 @@
 @if (cartDetails.totalCartPrice) {
 <section class="pt-[150px] pb-16 min-h-screen lg:w-[75%] mx-auto">
-  <h1 class="text-center text-3xl font-medium mb-5">Shopping Cart</h1>
+  <h1 class="text-center text-3xl font-medium mb-10">Shopping Cart</h1>
   <div class="flex justify-between">
-    <p>
-      Total cart price:
-      <span class="font-semibold"
-        ><span class="text-xs text-gray-800 font-normal">EGP</span>
-        {{ cartDetails.totalCartPrice | currency : " " }}
-      </span>
-    </p>
-    <button (click)="clearCart()" class="text-start text-gray-500 me-1">
+    <div>
+      <p>
+        Cart Items: <span class="font-semibold"
+          > 
+          {{ cartDetails.products.length }}
+        </span>
+      </p>
+      <p>
+        Total cart price:
+        <span class="font-semibold"
+          ><span class="text-xs text-gray-800 font-normal">EGP</span>
+          {{ cartDetails.totalCartPrice | currency : " " }}
+        </span>
+      </p>
+    </div>
+    <button (click)="clearCart()" class="text-start text-gray-500 me-1 border border-gray-500 px-4 rounded-lg">
       <i class="fas fa-trash-can me-2"></i>Clear Cart
     </button>
   </div>
