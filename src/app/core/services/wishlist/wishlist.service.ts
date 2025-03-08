@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { environment } from '../../environment/environment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +21,9 @@ export class WishlistService {
   }
 
   getLoggedUserWishlist(): Observable<any> {
+
+    const token = localStorage.getItem('userToken');
+    if (!token) return of(null); // يمنع إرسال الطلب إذا لم يكن هناك توكن دي من  gpt عشان كان بيظهر رسايل error اول لما بفتح ال login
     return this.httpClient.get(`${environment.baseUrl}/api/v1/wishlist`);
   }
 
