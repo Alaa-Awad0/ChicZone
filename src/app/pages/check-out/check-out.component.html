@@ -1,0 +1,160 @@
+<!-- @if (msgSuccess) {
+    <div class="success-message" [class]="{ 'fade-out': !msgSuccess }">
+      <i class="fas fa-check-circle"></i>
+      <span>{{ msgSuccess }}</span>
+    </div>
+    } -->
+
+<section class="min-h-screen flex justify-center items-center pt-[82px] pb-14">
+  <div class="w-full lg:w-1/2 bg-white px-16 py-10 rounded-xl shadow-md border">
+    <h1 class="text-3xl font-medium mb-3 text-center">Check Out</h1>
+    <form [formGroup]="checkOutForm" (ngSubmit)="submitForm()">
+      <div class="relative z-0 w-full mb-6 group">
+        @let detailsControl = checkOutForm.get('details');
+        <textarea
+          details="floating_details"
+          id="floating_details"
+          formControlName="details"
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-non focus:outline-none focus:ring-0 focus:border-black peer"
+          placeholder=" "
+          required
+        ></textarea>
+        <label
+          for="floating_details"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Details</label
+        >
+        @if ((detailsControl?.errors && detailsControl?.touched)) {
+        <ul class="flex text-sm text-red-600 mt-4" role="alert">
+          <svg
+            class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          @if (detailsControl?.getError('required')) {
+          <li>Order details are required.</li>
+          }
+        </ul>
+        }
+      </div>
+
+      <div class="relative z-0 w-full mb-6 group">
+        @let phoneControl = checkOutForm.get('phone');
+
+        <input
+          type="tel"
+          phone="floating_phone"
+          id="floating_phone"
+          formControlName="phone"
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-non focus:outline-none focus:ring-0 focus:border-black peer"
+          placeholder=" "
+          required
+        />
+        <label
+          for="floating_phone"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Phone</label
+        >
+        @if ((phoneControl?.errors && phoneControl?.touched) || msgError ) {
+        <ul class="flex text-sm text-red-600 mt-4" role="alert">
+          <svg
+            class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          @if (phoneControl?.getError('required')) {
+          <li>Phone number is required.</li>
+          }@else if (phoneControl?.getError('pattern')) {
+          <li>
+            Please enter a valid 11-digit Egyptian phone number starting with
+            010, 011, 012, or 015.
+          </li>
+          }@else {
+          <li>{{ msgError }}</li>
+          }
+        </ul>
+        }
+      </div>
+
+      <div class="relative z-0 w-full mb-6 group">
+        @let cityControl = checkOutForm.get('city');
+
+        <input
+          type="text"
+          city="floating_city"
+          id="floating_city"
+          formControlName="city"
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-non focus:outline-none focus:ring-0 focus:border-black peer"
+          placeholder=" "
+          required
+        />
+        <label
+          for="floating_city"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >City</label
+        >
+        @if ((cityControl?.errors && cityControl?.touched) || msgError ) {
+        <ul class="flex text-sm text-red-600 mt-4" role="alert">
+          <svg
+            class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          @if (cityControl?.getError('required')) {
+          <li>City is required.</li>
+          }@else {
+          <li>{{ msgError }}</li>
+          }
+        </ul>
+        }
+      </div>
+
+      <div class="flex gap-6">
+        <button
+          [disabled]="isLoading"
+          type="submit"
+          name="paymentMethod"
+          value="card"
+          (click)="setPaymentMethod('card')"
+
+          class="btn-main text-[18px]"
+        >
+          Pay Card @if (isLoading) {
+          <i class="fas fa-spin fa-spinner text-white"></i>
+          }
+        </button>
+        <button
+          [disabled]="isLoading"
+          type="submit"
+          name="paymentMethod" 
+    value="cash" 
+    (click)="setPaymentMethod('cash')"
+
+          class="btn-main text-[18px]"
+        >
+          Pay Cash @if (isLoading) {
+          <i class="fas fa-spin fa-spinner text-white"></i>
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

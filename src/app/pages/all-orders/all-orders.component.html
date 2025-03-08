@@ -1,0 +1,43 @@
+<div class="my-orders !pt-[150px] !pb-14 !min-h-screen">
+  <h2 class="text-center text-3xl font-medium mb-8">My Orders</h2>
+
+  @if (orders.length > 0) {
+  <div class="orders-container">
+    @for (order of orders; track order._id) {
+    <div class="order-card">
+      <div class="order-header">
+        <h3>Order ID: {{ order.id }}</h3>
+        <p class="status" [class]="getStatusClass(order)">
+          {{ getStatus(order) }}
+        </p>
+      </div>
+
+      <div class="order-info">
+        <p>
+          <strong>Placed on:</strong> {{ order.createdAt | date : "medium" }}
+        </p>
+        <p><strong>Total: </strong> <span class="text-xs font-normal">EGP</span> {{ order.totalOrderPrice }}</p>
+        <p><strong>Payment:</strong> {{ order.paymentMethodType }}</p>
+      </div>
+
+      <div class="products-container">
+        <h4>Items:</h4>
+        @for (item of order.cartItems; track item._id) {
+        <div class="product">
+          <img [src]="item.product.imageCover" alt="{{ item.product.title }}" />
+          <div class="product-details">
+            <h5>{{ item.product.title }}</h5>
+            <p>Brand: {{ item.product.brand.name }}</p>
+            <p>Quantity: {{ item.count }}</p>
+            <p>Price: <span class="text-xs font-normal">EGP</span> {{ item.price }}</p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+  <p class="empty-message">You haven't placed any orders yet.</p>
+  }
+</div>

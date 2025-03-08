@@ -1,0 +1,98 @@
+<section class="container min-h-screen pb-10 pt-[150px]">
+  <form class="md:w-[75%] mx-auto">
+    <label
+      for="default-search"
+      class="mb-2 text-sm font-medium text-gray-900 sr-only"
+      >Search</label
+    >
+    <div class="relative">
+      <div
+        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+      >
+        <svg
+          class="w-4 h-4 text-gray-500"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 20 20"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+          />
+        </svg>
+      </div>
+      <input
+        type="search"
+        id="default-search"
+        name="searchTerm"
+        class="block w-full p-4 ps-10 mb-10 text-sm text-gray-900 border border-gray-300 rounded-xl bg-gray-50 focus:ring-black focus:border-black placeholder:text-gray-500"
+        placeholder="Search by name..."
+        required
+        [(ngModel)]="searchTerm"
+      />
+    </div>
+  </form>
+
+  <!-- شرط عرض الرسالة إذا لم تكن هناك نتائج -->
+  @if ((products | search: searchTerm).length === 0) {
+  <div class="text-center text-gray-500 text-lg mt-20">
+    <p>No products found.</p>
+  </div>
+  } @else {
+
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+    @for (product of products | search: searchTerm ; track product.id) {
+    <div class="card cursor-pointer" [routerLink]="['/details', product.id]">
+      <div class="card-img relative h-[350px] rounded-md overflow-hidden">
+        <div
+          (click)="addToWishlist(product.id)"
+          (click)="$event.stopPropagation()"
+          class="bg-white flex p-3 border shadow-sm rounded-full absolute right-3 top-3 z-10 cursor-pointer"
+        >
+          <i
+            [class]="
+              isInWishlist(product.id) ? 'fa-solid text-red-600' : 'fa-regular'
+            "
+            class="fa-heart text-[20px]"
+          ></i>
+        </div>
+        <img
+          [src]="product.imageCover"
+          [alt]="product.title"
+          class="w-full h-full object-contain sm:scale-110"
+        />
+        <button
+          class="absolute bg-black hover:bg-[#1E293B] text-xs text-white py-2 px-2 rounded-full w-[50%]"
+          (click)="$event.stopPropagation()"
+          (click)="addToCart(product.id)"
+        >
+          <i class="fa-solid fa-cart-shopping me-1"></i>
+          Add to Cart
+        </button>
+      </div>
+      <div class="card-body py-4 pe-3">
+        <h4 class="text-gray-500 text-xs">{{ product.category.name }}</h4>
+        <h3 class="text-xl font-semibold">
+          {{ product.title.split(" ", 2).join(" ") }}
+        </h3>
+        <div class="flex justify-between items-center mt-2">
+          <span
+            class="text-sm text-green-500 border-2 border-green-500 px-2 py-1 rounded-md"
+          >
+            <span class="text-xs font-normal">EGP</span> {{ product.price }}
+          </span>
+          <div class="flex items-center">
+            <i class="me-1 fas fa-star text-yellow-300"></i>
+            <span class="text-gray-500"> {{ product.ratingsAverage }} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</section>

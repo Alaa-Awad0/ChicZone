@@ -1,0 +1,16 @@
+<div class="brands min-h-screen !pt-[150px] pb-12">
+      @if (brands.length > 0) {
+        <div class="brands-container">
+          @for (brand of brands; track brand._id) {
+            <div class="brand-card">
+              <img [src]="brand.image" class="w-full" alt="{{ brand.name }}" />
+              <h3>{{ brand.name }}</h3>
+            </div>
+          }
+        </div>
+      } @else {
+        <p class="empty-message">No brands available.</p>
+      }
+    
+  </div>
+  

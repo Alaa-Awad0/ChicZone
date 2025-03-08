@@ -1,0 +1,140 @@
+.my-orders {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  
+    .title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+  
+    .orders-container {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+  
+    .order-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+  
+      .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+  
+        h3 {
+          font-size: 18px;
+          margin: 0;
+        }
+  
+        .status {
+          font-weight: bold;
+          text-transform: uppercase;
+          padding: 5px 10px;
+          border-radius: 5px;
+        }
+      }
+  
+      .order-info {
+        background: #f9f9f9;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+  
+        p {
+          font-size: 14px;
+          color: #666;
+          margin: 5px 0;
+        }
+      }
+  
+      .products-container {
+        margin-top: 10px;
+  
+        h4 {
+          margin-bottom: 8px;
+        }
+  
+        .product {
+          display: flex;
+          align-items: center;
+          background: #f1f1f1;
+          padding: 10px;
+          border-radius: 8px;
+          margin-bottom: 5px;
+  
+          img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+          }
+  
+          .product-details {
+            flex: 1;
+  
+            h5 {
+              font-size: 16px;
+              margin: 0;
+            }
+  
+            p {
+              font-size: 14px;
+              color: #555;
+              margin: 3px 0;
+            }
+          }
+        }
+      }
+  
+      .details-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+  
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  
+    .empty-message {
+      text-align: center;
+      font-size: 16px;
+      color: #777;
+    }
+  
+    // ألوان لحالات الطلب
+    .pending {
+      background-color: orange;
+      color: white;
+    }
+  
+    .processing {
+      background-color: #000;
+      color: white;
+    }
+  
+    .delivered {
+      background-color: green;
+      color: white;
+    }
+  
+    .cancelled {
+      background-color: red;
+      color: white;
+    }
+  }
+  

@@ -1,0 +1,75 @@
+@if (cartDetails.totalCartPrice) {
+<section class="pt-[150px] pb-16 min-h-screen lg:w-[75%] mx-auto">
+  <h1 class="text-center text-3xl font-medium mb-5">Shopping Cart</h1>
+  <div class="flex justify-between">
+    <p>
+      Total cart price:
+      <span class="font-semibold"
+        ><span class="text-xs text-gray-800 font-normal">EGP</span>
+        {{ cartDetails.totalCartPrice | currency : " " }}
+      </span>
+    </p>
+    <button (click)="clearCart()" class="text-start text-gray-500 me-1">
+      <i class="fas fa-trash-can me-2"></i>Clear Cart
+    </button>
+  </div>
+  <!-- {count, price, product} -->
+  @for (prod of cartDetails.products; track prod.product._id) {
+  <div
+    class="grid md:grid-cols-[15%_minmax(0,1fr)] gap-4 bg-gray-100 rounded p-5 my-5"
+  >
+    <div>
+      <img
+        [src]="prod.product.imageCover"
+        [alt]="prod.product.title"
+        class="w-full h-full"
+      />
+    </div>
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col gap-3">
+        <h2 class="text-xl">{{ prod.product.title }}</h2>
+        <p>
+          Price:
+          <span class="text-green-600"
+            ><span class="text-xs font-normal">EGP</span> {{ prod.price }}</span
+          >
+        </p>
+        <button (click)="removeItem(prod.product._id)" class="text-start text-gray-500 ">
+          <i class="fas fa-trash-can me-2"></i>Remove
+        </button>
+      </div>
+      <div class="flex items-center gap-4">
+        <button (click)="updateCount(prod.product._id, prod.count + 1)">
+          <i class="fa-solid fa-square-plus text-2xl"></i>
+        </button>
+        <span> {{ prod.count }} </span>
+        <button (click)="updateCount(prod.product._id, prod.count - 1)">
+          <i class="fa-solid fa-square-minus text-2xl"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+
+  <button
+    class="btn-main"
+    routerLink="/check-out"
+    (click)="saveIdCart(cartDetails._id)"
+  >
+    Check out
+  </button>
+</section>
+}@else {
+<!-- Empty Cart Message -->
+<div
+  class="flex flex-col items-center justify-center min-h-screen w-[75%] mx-auto text-center"
+>
+  <h2 class="text-2xl font-semibold text-gray-700">Your cart is empty</h2>
+  <p class="text-gray-500 mt-2">
+    Looks like you haven't added anything to your cart yet.
+  </p>
+  <button routerLink="/home" class="mt-5 btn-main !w-[70%]">
+    Start Shopping
+  </button>
+</div>
+}

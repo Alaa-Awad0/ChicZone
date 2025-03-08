@@ -1,0 +1,70 @@
+// 🎨 تعريف الألوان الجديدة
+$success-bg: #e0f5e0; // أخضر فاتح جدًا للخلفية
+$success-border: #22c55e; // أخضر غامق قليلًا للحواف
+$success-text: #166534; // أخضر داكن للنص
+$icon-color: #16a34a; // أيقونة بلون أخضر أغمق
+
+$animation-duration: 0.5s; // مدة الأنيميشن
+
+// 🎬 Mixin للأنيميشن: دخول من اليمين
+@mixin slide-in-right {
+  animation: slide-in-right $animation-duration ease-out;
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(100px); // تبدأ خارج الشاشة من اليمين
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+// 🎬 Mixin للأنيميشن: خروج إلى اليمين
+@mixin slide-out-right {
+  animation: slide-out-right $animation-duration ease-in forwards;
+  @keyframes slide-out-right {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(100px); // تخرج باتجاه اليمين
+    }
+  }
+}
+
+// 🎬 نبض للأيقونة
+@mixin pulse-animation {
+  animation: pulse 1s infinite alternate;
+  @keyframes pulse {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// ✨ تصميم رسالة النجاح
+.success-message {
+  @apply fixed top-[100px] right-10 flex items-center px-6 py-2 rounded-lg shadow-lg ;
+  background-color: $success-bg;
+  border: 2px solid $success-border;
+  color: $success-text;
+  transition: all $animation-duration ease-in-out;
+  @include slide-in-right;
+
+  &.fade-out {
+    @include slide-out-right;
+  }
+
+  i {
+    color: $icon-color;
+    margin-right: 10px;
+    @include pulse-animation;
+  }
+}

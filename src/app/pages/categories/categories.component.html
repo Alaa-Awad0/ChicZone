@@ -1,0 +1,19 @@
+<div class="categories min-h-screen pt-[150px] pb-14">
+
+   
+    @if (categories.length > 0) {
+      <div class="categories-container">
+        @for (category of categories; track category._id) {
+          <div class="category-card">
+            <img [src]="category.image" alt="{{ category.name }}" />
+            <div class="category-info">
+              <h3>{{ category.name }}</h3>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <p class="empty-message">No categories available.</p>
+    }
+  
+</div>

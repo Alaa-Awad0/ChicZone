@@ -1,0 +1,50 @@
+@if (productDetails) {
+<section class="min-h-screen flex justify-center items-center pt-[82px]">
+  <div class="grid md:grid-cols-[30%_minmax(0,1fr)] gap-10">
+    <div>
+      <div class="mb-4">
+        <img
+          [src]="productDetails.imageCover"
+          [alt]="productDetails.title"
+          class="imageCover w-full"
+        />
+      </div>
+      <div class="flex justify-center gap-4">
+        @for (img of productDetails.images; track $index) {
+        <div class="img-container w-1/4 hover:scale-105 hover:shadow-lg transition" (click)="changeImg(img)">
+          <img [src]="img" alt="" class="w-full cursor-pointer" />
+        </div>
+        }
+      </div>
+    </div>
+    <div class="flex flex-col gap-4 pt-20">
+      <h2 class="text-3xl font-semibold text-gray-800">{{ productDetails.title }}</h2>
+      <div class="flex justify-between items-center text-green-600">
+        <p class="text-3xl font-bold"><span class="text-sm font-normal">EGP</span> {{ productDetails.price }}</p>
+        <div class="flex items-center">
+          @for (num of [0, 1, 2, 3, 4, 5].slice(0,
+          productDetails.ratingsAverage) ; track $index) {
+          <i class="me-1 fas fa-star text-yellow-300"></i>
+          } @if (productDetails.ratingsAverage % 1 !== 0) {
+          <i class="me-1 fas fa-star-half-stroke text-yellow-300"></i>
+
+          }
+          <span class="text-gray-500">
+            {{ productDetails.ratingsAverage }}
+          </span>
+        </div>
+      </div>
+      <p>{{ productDetails.description }}</p>
+      <div class="flex flex-wrap gap-4 items-center">
+        <span class="text-gray-700 font-medium">Sold:</span>
+        <span class="text-lg text-blue-600 font-bold">{{ productDetails.sold }}</span>
+        <span class="text-gray-700 font-medium ms-4">Available Quantity:</span>
+        <span class="text-lg text-green-600 font-bold">{{ productDetails.quantity }}</span>
+      </div>
+      <button class="btn-main text-white px-6 py-3 rounded-lg text-lg font-medium shadow-md transition-colors" (click)="addToCart(productDetails._id)">
+        Add To Cart
+      </button>
+    </div>
+  </div>
+</section>
+}
