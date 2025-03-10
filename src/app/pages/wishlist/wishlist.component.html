@@ -80,17 +80,14 @@
       } @else {
       <span class="text-red-500 font-semibold text-sm">Out of Stock</span>
       }
-      <div class="flex flex-col space-y-2">
-        <span class="text-sm text-gray-500">
-          Added on: {{ product.createdAt}}
-        </span>
+     
+        
         <button
           (click)="addToCart(product._id)"
           class="btn-main w-fit text-white px-4 py-2 rounded-lg transition text-sm"
         >
           Add to cart
         </button>
-      </div>
     </div>
     }
   </div>

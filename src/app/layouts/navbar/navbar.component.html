@@ -6,6 +6,8 @@
     >
       <h1 class="text-3xl font-semibold border-e pe-4">ChicZone.</h1>
     </a>
+    @if (isLogin()) {
+
     <a
       class="relative ms-auto me-2 lg:hidden"
       routerLink="/wishlist"
@@ -32,7 +34,7 @@
         {{ navCartCount() }}
       </div>
     </a>
-
+    }
     <button
       data-collapse-toggle="navbar-default"
       type="button"
