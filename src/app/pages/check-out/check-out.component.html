@@ -7,7 +7,7 @@
 
 <section class="min-h-screen flex justify-center items-center pt-[82px] pb-14">
   <div class="w-full lg:w-1/2 bg-white px-16 py-10 rounded-xl shadow-md border">
-    <h1 class="text-3xl font-medium mb-10 text-center">Check Out</h1>
+    <h1 class="text-3xl font-medium mb-10 text-center">Checkout</h1>
     <form [formGroup]="checkOutForm" (ngSubmit)="submitForm()">
       <div class="relative z-0 w-full mb-6 group">
         @let detailsControl = checkOutForm.get('details');
@@ -22,7 +22,7 @@
         <label
           for="floating_details"
           class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-1 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >Details</label
+          >Order Details</label
         >
         @if ((detailsControl?.errors && detailsControl?.touched)) {
         <ul class="flex text-sm text-red-600 mt-4" role="alert">
@@ -59,7 +59,7 @@
         <label
           for="floating_phone"
           class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >Phone</label
+          >Phone Number</label
         >
         @if ((phoneControl?.errors && phoneControl?.touched) || msgError ) {
         <ul class="flex text-sm text-red-600 mt-4" role="alert">
@@ -103,7 +103,7 @@
         <label
           for="floating_city"
           class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >City</label
+          >Delivery City</label
         >
         @if ((cityControl?.errors && cityControl?.touched) || msgError ) {
         <ul class="flex text-sm text-red-600 mt-4" role="alert">
@@ -137,7 +137,7 @@
 
           class="btn-main text-[18px]"
         >
-          Pay Card @if (isLoading) {
+        Pay with Card @if (isLoading) {
           <i class="fas fa-spin fa-spinner text-white"></i>
           }
         </button>
@@ -150,7 +150,7 @@
 
           class="btn-main text-[18px]"
         >
-          Pay Cash @if (isLoading) {
+        Pay with Cash @if (isLoading) {
           <i class="fas fa-spin fa-spinner text-white"></i>
           }
         </button>
