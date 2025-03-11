@@ -14,7 +14,7 @@ export class WishlistService {
   }
   private readonly toastrService = inject(ToastrService);
   wishlistNum: WritableSignal<number> = signal(0);
-  wishlist: string[] = []; // لتغيير لوم القلب
+  wishlist: string[] = [];   // code for change heart color
 
 
   constructor(private httpClient: HttpClient) {}
@@ -40,7 +40,7 @@ export class WishlistService {
 
 
 
-
+// code for change heart color
 
   addToWishlist(productId: string): void {
     if (this.isInWishlist(productId)) {
@@ -91,9 +91,10 @@ export class WishlistService {
     });
   }
 
-  // لتغيير لوم القلب
-
   isInWishlist(productId: string): boolean {
     return this.wishlist.includes(productId);
   }
+
+  // code for change heart color
+
 }
