@@ -39,7 +39,7 @@
 
 <!-- products -->
 
-<section class="container pb-10">
+<section class="container pb-10 min-h-screen">
   <h2
     class="text-2xl font-semibold mb-10 text-center border-b border-gray-300 w-fit mx-auto pb-2"
   >
@@ -83,6 +83,12 @@
       />
     </div>
   </form>
+
+  @if ((products | search: searchTerm).length === 0) {
+    <div class="text-center text-gray-500 text-lg mt-20">
+      <p>No products found.</p>
+    </div>
+    } @else {
 
   <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
     @for (product of products.slice(0,12)| search: searchTerm ; track
@@ -135,4 +141,5 @@
     </div>
     }
   </div>
+}
 </section>
