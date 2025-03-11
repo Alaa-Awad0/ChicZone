@@ -48,7 +48,7 @@ export class WishlistService {
       this.removeWishlistItem(productId).subscribe({
         next: (res) => {
           if (res.status === 'success') {
-            this.toastrService.success(res.message, 'Removed from Wishlist');
+            this.toastrService.success(res.message, 'Success');
 
             // تحديث قائمة الأمنيات
             this.wishlist = this.wishlist.filter((id) => id !== productId);
@@ -64,7 +64,7 @@ export class WishlistService {
       this.addProductToWishlist(productId).subscribe({
         next: (res) => {
           if (res.status === 'success') {
-            this.toastrService.success(res.message, 'Added to Wishlist');
+            this.toastrService.success(res.message, 'Success');
 
             // تحديث قائمة الأمنيات
             this.wishlist.push(productId);
