@@ -49,13 +49,13 @@
     <div class="card cursor-pointer" [routerLink]="['/details', product.id]">
       <div class="card-img relative h-[350px] rounded-md overflow-hidden">
         <div
-          (click)="addToWishlist(product.id)"
-          (click)="$event.stopPropagation()"
+        (click)="wishlistService.addToWishlist(product.id); $event.stopPropagation()"
+        (click)="$event.stopPropagation()"
           class="bg-white flex p-3 border shadow-sm rounded-full absolute right-3 top-3 z-10 cursor-pointer"
         >
           <i
             [class]="
-              isInWishlist(product.id) ? 'fa-solid text-red-600' : 'fa-regular'
+              wishlistService.isInWishlist(product.id) ? 'fa-solid text-red-600' : 'fa-regular'
             "
             class="fa-heart text-[20px]"
           ></i>

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { environment } from '../../environment/environment';
 import { Observable, of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { IProduct } from '../../../shared/interfaces/iproduct';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,10 @@ export class WishlistService {
   addProductToCart(productId: string) {
     throw new Error('Method not implemented.');
   }
+  private readonly toastrService = inject(ToastrService);
   wishlistNum: WritableSignal<number> = signal(0);
+  wishlist: string[] = []; // لتغيير لوم القلب
+
 
   constructor(private httpClient: HttpClient) {}
 
@@ -31,5 +36,64 @@ export class WishlistService {
     return this.httpClient.delete(
       `${environment.baseUrl}/api/v1/wishlist/${id}`
     );
+  }
+
+
+
+
+
+  addToWishlist(productId: string): void {
+    if (this.isInWishlist(productId)) {
+      // إزالة المنتج من القائمة
+      this.removeWishlistItem(productId).subscribe({
+        next: (res) => {
+          if (res.status === 'success') {
+            this.toastrService.success(res.message, 'Removed from Wishlist');
+
+            // تحديث قائمة الأمنيات
+            this.wishlist = this.wishlist.filter((id) => id !== productId);
+
+            // تحديث عدد العناصر في القائمة
+            this.wishlistNum.set(res.data.length);
+          }
+        },
+        error: (error) => console.error('Error:', error),
+      });
+    } else {
+      // إضافة المنتج إلى القائمة
+      this.addProductToWishlist(productId).subscribe({
+        next: (res) => {
+          if (res.status === 'success') {
+            this.toastrService.success(res.message, 'Added to Wishlist');
+
+            // تحديث قائمة الأمنيات
+            this.wishlist.push(productId);
+
+            // تحديث عدد العناصر في القائمة
+            this.wishlistNum.set(res.data.length);
+
+          }
+        },
+        error: (error) => console.error('Error:', error),
+      });
+    }
+  }
+
+  getWishlistData(): void {
+    this.getLoggedUserWishlist().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.wishlist = res.data.map((item: IProduct) => item.id);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  // لتغيير لوم القلب
+
+  isInWishlist(productId: string): boolean {
+    return this.wishlist.includes(productId);
   }
 }

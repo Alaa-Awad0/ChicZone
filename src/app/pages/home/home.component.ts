@@ -23,19 +23,18 @@ export class HomeComponent implements OnInit {
   private readonly productsService = inject(ProductsService);
   private readonly categoriesService = inject(CategoriesService);
   private readonly cartService = inject(CartService);
-  private readonly wishlistService = inject(WishlistService);
+   readonly wishlistService = inject(WishlistService);
   private readonly toastrService = inject(ToastrService);
   private readonly ngxSpinnerService = inject(NgxSpinnerService);
 
   products: IProduct[] = [];
   categories: ICategory[] = [];
   searchTerm: string = '';
-  wishlist: string[] = []; // لتغيير لوم القلب
 
   ngOnInit(): void {
     this.getProductsData();
     this.getCategoryData();
-    this.getWishlistData(); // لتغيير لوم القلب
+    this.wishlistService.getWishlistData();
   }
 
   getProductsData(): void {
@@ -74,38 +73,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addToWishlist(productId: string): void {
-    this.wishlistService.addProductToWishlist(productId).subscribe({
-      next: (res) => {
-        console.log(res);
-        if (res.status === 'success') {
-          this.toastrService.success(res.message, 'Success');
-          this.wishlistService.wishlistNum.set(res.data.length);
-          console.log(this.wishlistService.wishlistNum());
-          this.getWishlistData();
-        }
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  
 
-
-    // لتغيير لوم القلب
-
-  isInWishlist(productId: string): boolean {
-    return this.wishlist.includes(productId);
-  }
-
-  getWishlistData(): void {
-    this.wishlistService.getLoggedUserWishlist().subscribe({
-      next: (res) => {
-        this.wishlist = res.data.map((item: IProduct) => item.id);
-      },
-      error: (error) => console.error('Error:', error),
-    });
-  }
+  // getWishlistData(): void {
+  //   this.wishlistService.getLoggedUserWishlist().subscribe({
+  //     next: (res) => {
+  //       this.wishlist = res.data.map((item: IProduct) => item.id);
+  //     },
+  //     error: (error) => console.error('Error:', error),
+  //   });
+  // }
   // لتغيير لوم القلب
 
   customMainSlider: OwlOptions = {
