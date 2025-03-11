@@ -66,12 +66,19 @@
           class="w-full h-full object-contain sm:scale-110"
         />
         <button
-          class="absolute bg-black hover:bg-[#1E293B] text-xs text-white py-2 px-2 rounded-full w-[50%]"
+          class="lg-btn hidden lg:block absolute bg-black hover:bg-[#1E293B] text-xs text-white py-2 px-2 rounded-full w-[50%]"
           (click)="$event.stopPropagation()"
           (click)="addToCart(product.id)"
         >
           <i class="fa-solid fa-cart-shopping me-1"></i>
           Add to Cart
+        </button>
+        <button
+          class="lg:hidden absolute end-3 bottom-3 z-10 bg-white text-[20px]  py-2 px-2 rounded-lg shadow-sm border"
+          (click)="$event.stopPropagation()"
+          (click)="addToCart(product.id)"
+        >
+          + <i class="fa-solid fa-cart-shopping me-1"></i>
         </button>
       </div>
       <div class="card-body py-4 pe-3">
