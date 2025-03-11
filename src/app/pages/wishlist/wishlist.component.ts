@@ -71,16 +71,20 @@ export class WishlistComponent implements OnInit {
     }
   }
 
-  // ✅ دالة لحذف العنصر فعليًا دون تكرار الكود
+  // ✅ دالة لحذف العنصر وتحديث القائمة فورًا
   private deleteWishlistItem(id: string): void {
     this.wishlistService.removeWishlistItem(id).subscribe({
-      next: (res) => {
-        console.log('remove', res);
-        this.getWishlist();
+      next: () => {
+        console.log('Item removed:', id);
+
+        // ✅ تحديث القائمة فورًا بدون الحاجة إلى `getWishlist()`
+        this.wishlist = this.wishlist.filter((item) => item.id !== id);
+
+        // ✅ تحديث عدد العناصر في `wishlistNum`
         this.wishlistService.wishlistNum.set(this.wishlist.length);
       },
       error: (err) => {
-        console.log(err);
+        console.error('Error removing item:', err);
       },
     });
   }
